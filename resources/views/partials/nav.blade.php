@@ -1,6 +1,6 @@
 <nav class="menu-strip">
   <div class="container">
-    <ul class="nav flex-wrap">
+    <ul class="nav justify-content-center flex-wrap">
       <li class="nav-item"><a class="nav-link {{ request()->routeIs('renungan.index') ? 'active' : '' }}" href="{{ route('renungan.index') }}">Renungan</a></li>
       <li class="nav-item"><a class="nav-link {{ request()->routeIs('warta.index') ? 'active' : '' }}" href="{{ route('warta.index') }}">Warta Jemaat</a></li>
       <li class="nav-item"><a class="nav-link {{ request()->routeIs('berita.index') ? 'active' : '' }}" href="{{ route('berita.index') }}">Berita</a></li>

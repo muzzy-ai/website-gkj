@@ -2,20 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Renungan;
-use App\Models\Berita;
-use App\Models\AgendaItem;
 use App\Models\Informasi;
+use App\Models\Photo;
+use Illuminate\Support\Facades\Route;
 
 class SiteController extends Controller
 {
     public function home()
     {
-        return view('site.home', [
-            'renungan' => Renungan::where('status','published')->latest('published_at')->first(),
-            'berita'   => Berita::where('status','published')->latest('published_at')->take(3)->get(),
-            'agenda'   => AgendaItem::where('status','published')->orderBy('start_at')->take(4)->get(),
-            'infos'    => Informasi::where('status','published')->latest('published_at')->take(4)->get(),
-        ]);
+        // Foto galeri utama (terbaru)
+        $heroPhoto = Photo::orderByDesc('id')->first();
+
+        // Informasi terbaru (published)
+        $infos = Informasi::where('status', 'published')
+            ->orderByDesc('published_at')
+            ->take(5)
+            ->get(['id','title','slug','published_at']);
+
+        // Artikel yang ditampilkan di panel kanan (ambil 1 terbaru)
+        $featured = Informasi::where('status', 'published')
+            ->orderByDesc('published_at')
+            ->first(['id','title','body','published_at']);
+
+        // Helper kecil untuk URL informasi (pakai rute jika ada)
+        $infoUrl = function ($info) {
+            if (Route::has('informasi.show')) {
+                // Jika kamu sudah punya show by slug, ganti ke ['slug'=>$info->slug]
+                return route('informasi.show', ['id' => $info->id]);
+            }
+            return url('/informasi/'.$info->id);
+        };
+
+        return view('TampilanUtama.beranda', compact('heroPhoto','infos','featured','infoUrl'));
     }
 }

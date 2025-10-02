@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Berita extends Model
 {
     use HasFactory, SoftDeletes;
-
+    protected $table = 'berita';
     protected $fillable = [
         'title','slug','excerpt','body','status','cover_path',
         'category','meta_title','meta_description','published_at',

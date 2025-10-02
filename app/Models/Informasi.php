@@ -10,7 +10,7 @@ class Informasi extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'informasi_pentings'; // kalau tabel pakai nama ini
+    protected $table = 'informasi'; // kalau tabel pakai nama ini
 
     protected $fillable = [
         'title','slug','excerpt','body','status','cover_path',

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class AgendaItem extends Model
 {
     use HasFactory, SoftDeletes;
-
+    protected $table = 'agenda_items';
     protected $fillable = [
         'title','slug','excerpt','body','status','cover_path',
         'start_at','end_at','location','organizer',

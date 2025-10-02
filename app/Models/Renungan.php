@@ -10,6 +10,8 @@ class Renungan extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'renungan';
+
     protected $fillable = [
         'title','slug','excerpt','body','status','cover_path',
         'meta_title','meta_description','published_at',
